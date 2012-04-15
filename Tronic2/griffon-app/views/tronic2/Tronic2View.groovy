@@ -7,8 +7,8 @@ import net.miginfocom.swing.MigLayout
 
 application(name: 'bienvenidoScreen', id: 'bienvenidoScreen', title: 'BIENVENIDO',
         preferredSize: [420, 328], componentResized: controller.tamano,
-        pack: true, resizable: false,
-        locationByPlatform: true,
+        pack: true, resizable: true,
+        locationByPlatform: false,
         iconImage: imageIcon('/LOGO.png').image) {
     panel(layout: new MigLayout('insets 6 5 0 0')) {
         hudLabel(icon: imageIcon('/LOGO sin fondo.png'), constraints: 'wrap')
