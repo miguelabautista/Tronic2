@@ -13,7 +13,7 @@ class Tronic2Controller {
         def tmpList = usuarioDBService.getUsuario()
         edt {model.usuario.addAll(tmpList)}
     }
-    //TODO arreglar al final. determinar si destruir el group principal
+    //TODO arreglar al final. determinar si destruir el group principal	
     def entrar = { evt = null ->
         doOutside {
             String usuario = (String) view.passwordCombo.getSelectedItem()
