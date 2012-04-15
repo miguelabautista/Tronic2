@@ -6,7 +6,8 @@ import net.java.balloontip.styles.EdgedBalloonStyle
 import net.miginfocom.swing.MigLayout
 
 application(name: 'bienvenidoScreen', id: 'bienvenidoScreen', title: 'BIENVENIDO',
-        preferredSize: [420, 328],
+        //TODO:cambio
+        preferredSize: [420, 328], componentResized: controller.tamano,
         pack: true, resizable: false,
         locationByPlatform: true,
         iconImage: imageIcon('/LOGO.png').image) {

@@ -77,4 +77,8 @@ class Tronic2Controller {
             view.ba1.setVisible(false)
         }
     }
+    def tamano = { evt = null ->
+        println "ancho ${evt.component.width} largo ${evt.component.height}"
+    }
+
 }

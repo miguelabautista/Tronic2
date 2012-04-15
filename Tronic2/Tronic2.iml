@@ -7,13 +7,13 @@
       <sourceFolder url="file://$MODULE_DIR$/griffon-app/models" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/griffon-app/views" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/griffon-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/griffon-app/services" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="griffon-0.9.5-rc2" level="application" />
+    <orderEntry type="library" name="griffon-0.9.5" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Griffon:lib (Tronic2)">
         <CLASSES>
@@ -24,7 +24,6 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="griffon-0.9.5" level="application" />
     <orderEntry type="module" module-name="Tronic2-griffonPlugins" />
   </component>
 </module>
