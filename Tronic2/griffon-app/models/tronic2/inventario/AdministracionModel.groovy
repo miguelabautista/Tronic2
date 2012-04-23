@@ -62,7 +62,7 @@ class AdministracionModel {
         precioUnitarioNuevo(matches: /(\d)+(\.(\d)+)?/, blank: false, nullable: false)
         precioSinIvaNuevo(matches: /(\d)+(\.(\d)+)?/, blank: false, nullable: false)
         pvpNuevo(matches: /(\d)+(\.(\d)+)?/, blank: false, nullable: false)
-        precioLotesNuevo(blank: false, nullable: false,)
+        precioLotesNuevo(blank: false, nullable: false)
     }
 
     def isNumber = { val ->

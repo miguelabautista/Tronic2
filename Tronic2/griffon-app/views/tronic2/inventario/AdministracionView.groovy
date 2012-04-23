@@ -47,7 +47,7 @@ dialog(name: 'administracionScreen', id: 'administracionScreen', title: 'Adminis
         textField(name: 'psiText', id: 'psiText', preferredSize: [125, 23], text: bind {model.precioSinIva}, errorRenderer: 'for:precioSinIvaNuevo,styles:[hightlight]', enabled: bind {model.textFieldsEnable}, focusGained: controller.foco, focusLost: controller.focoPerdido)
         balloonTip(id: 'ba5', text: 'Debe ser un valor numerico valido', component: psiText, alignment: BalloonTip.Orientation.RIGHT_ABOVE, style: new EdgedBalloonStyle(Color.white, Color.blue), attachLocation: BalloonTip.AttachLocation.NORTHEAST, horizontalOffset: 40, verticalOffset: 15, useCloseButton: false)
         hudLabel(text: 'PVP', constraints: 'align right')
-        textField(name: 'pvpText', id: 'pvpText', preferredSize: [125, 23], text: bind {model.pvp}, errorRenderer: 'for:pvpNuevo,styles:[hightlight]', enabled: bind {model.textFieldsEnable})
+        textField(name: 'pvpText', id: 'pvpText', preferredSize: [125, 23], text: bind {model.pvp}, errorRenderer: 'for:pvpNuevo,styles:[hightlight]', enabled: bind {model.textFieldsEnable},focusGained: controller.foco)
         balloonTip(id: 'ba6', text: 'Debe ser un valor numerico valido', component: pvpText, alignment: BalloonTip.Orientation.RIGHT_ABOVE, style: new EdgedBalloonStyle(Color.white, Color.blue), attachLocation: BalloonTip.AttachLocation.NORTHEAST, horizontalOffset: 40, verticalOffset: 15, useCloseButton: false)
         hudLabel(text: 'Precio Lotes', constraints: 'align right')
         textField(name: 'plotesText', id: 'plotesText', preferredSize: [125, 23], constraints: 'wrap', errorRenderer: 'for:precioLotesNuevo,styles:[hightlight]', text: bind {model.precioLotes}, enabled: false)

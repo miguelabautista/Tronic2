@@ -19,6 +19,9 @@ application(name: 'firstScreen', id: 'firstScreen', title: 'TRONIC',
         }
 
     }
+
+
+    /*
     panel() {
         migLayout()
         jxtaskPaneContainer(constraints: "dock west") {
@@ -28,6 +31,6 @@ application(name: 'firstScreen', id: 'firstScreen', title: 'TRONIC',
         }
 
 
-    }
+    }  */
 }
 firstScreen.setLocationRelativeTo(null)

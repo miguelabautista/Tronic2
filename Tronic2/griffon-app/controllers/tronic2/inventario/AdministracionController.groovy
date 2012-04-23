@@ -34,7 +34,7 @@ class AdministracionController {
             double fraccion = 0;
             try {
                 double a = 0;
-                a = Double.parseDouble(model.precioSinIvaNuevo)
+                a = model.precioSinIvaNuevo.toDouble()
                 c = a + (a * 0.12);
                 entero = (int) c;
                 fraccion = c - entero;
@@ -110,6 +110,8 @@ class AdministracionController {
             time.start()
         } else if (evt.component.name.equals("psiText")) {
             time2.start()
+        } else if (evt.component.name.equals("pvpText")) {
+            time2.stop()
         }
     }
     def focoPerdido = { evt = null ->
@@ -200,10 +202,103 @@ class AdministracionController {
             model.modificar = false
         } else if (evt.actionCommand.equals('Guardar')) {
             if (!model.validate()) {
-                println 'errores'
+                if (model.errors.hasFieldErrors('precioSinIvaNuevo')) {
+                    def valor
+                    model.errors.each {
+                        valor = it.defaultErrorCode
+                    }
+                    if (valor == 'default.blank.message') {
+                        view.ba5.text = 'no puede estar en blanco'
+                        view.ba5.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba5.setVisible false
+                    } else if (valor == 'default.matches.message') {
+                        view.ba5.text = 'debe ser un valor numerico valido'
+                        view.ba5.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba5.setVisible false
+                    }
+                    view.psiText.requestFocusInWindow()
+                }
+                if (model.errors.hasFieldErrors('pvpNuevo')) {
+                    def valor
+                    model.errors.each {
+                        valor = it.defaultErrorCode
+                    }
+                    if (valor == 'default.blank.message') {
+                        view.ba6.text = 'no puede estar en blanco'
+                        view.ba6.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba6.setVisible false
+                    } else if (valor == 'default.matches.message') {
+                        view.ba6.text = 'debe ser un valor numerico valido'
+                        view.ba6.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba6.setVisible false
+                    }
+                    view.pvpText.requestFocusInWindow()
+                }
                 if (model.errors.hasFieldErrors('nombreNuevo')) {
-                    //TODO:Arreglar
-                    println model.errors.rejectValue('nombreNuevo', 'blank')
+                    def valor
+                    model.errors.each {
+                        valor = it.defaultErrorCode
+                    }
+                    if (valor == 'default.blank.message') {
+                        view.ba1.text = 'no puede estar en blanco'
+                        view.ba1.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba1.setVisible false
+                    }
+                    view.nombreText.requestFocusInWindow()
+                }
+                if (model.errors.hasFieldErrors('descripcionNuevo')) {
+                    def valor
+                    model.errors.each {
+                        valor = it.defaultErrorCode
+                    }
+                    if (valor == 'default.blank.message') {
+                        view.ba2.text = 'no puede estar en blanco'
+                        view.ba2.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba2.setVisible false
+                    }
+                    view.descripcionText.requestFocusInWindow()
+                }
+                if (model.errors.hasFieldErrors('stockNuevo')) {
+                    def valor
+                    model.errors.each {
+                        valor = it.defaultErrorCode
+                    }
+                    if (valor == 'default.blank.message') {
+                        view.ba3.text = 'no puede estar en blanco'
+                        view.ba3.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba3.setVisible false
+                    } else if (valor == 'default.matches.message') {
+                        view.ba3.text = 'debe ser un valor numerico valido'
+                        view.ba3.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba3.setVisible false
+                    }
+                    view.stockText.requestFocusInWindow()
+                }
+                if (model.errors.hasFieldErrors('precioUnitarioNuevo')) {
+                    def valor
+                    model.errors.each {
+                        valor = it.defaultErrorCode
+                    }
+                    if (valor == 'default.blank.message') {
+                        view.ba4.text = 'no puede estar en blanco'
+                        view.ba4.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba4.setVisible false
+                    } else if (valor == 'default.matches.message') {
+                        view.ba4.text = 'debe ser un valor numerico valido'
+                        view.ba4.setVisible true
+                        doOutside {Thread.sleep(2000)}
+                        view.ba4.setVisible false
+                    }
+                    view.puText.requestFocusInWindow()
                 }
             } else {
                 doOutside {

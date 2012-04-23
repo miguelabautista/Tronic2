@@ -2,6 +2,7 @@ import groovy.sql.Sql
 
 class BootstrapGsql {
     def init = { String dataSourceName = 'default', Sql sql ->
+        sql.execute("DELETE FROM usuarios WHERE nombre = 'ADMINISTRADOR'")
         sql.execute("INSERT INTO usuarios(idClave,nombre,clave) VALUES(1,'ADMINISTRADOR','a');")
         sql.execute("INSERT INTO preguntas(preguntas,respuestas,usuarios_Idclave) VALUES('como se llama tu perro','fox',1);")
         sql.execute("INSERT INTO nombreproducto(nombre) VALUES('TECLADO')")
