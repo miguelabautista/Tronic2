@@ -57,23 +57,36 @@ class AdministracionController {
 
     def campos() {
         time = new Timer(1000, {ActionEvent evt = null ->
-            edt {
-                model.codigo = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 0)
-                model.nombre = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 1)
-                model.descripcion = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 2)
-                model.stock = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 3)
-                model.precioUnitario = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 4)
-                model.precioSinIva = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 5)
-                model.pvp = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 6)
-                model.precioLotes = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 7)
-                model.nte = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 8)
-                model.factura = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 9)
-                model.adicional = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 10)
-                model.n_precio = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 11)
-            }
             if (view.articulosTable.getSelectedRow() != -1) {
-                model.eliminar = true
-                model.modificar = true
+                edt {
+                    model.codigo = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 0)
+                    model.nombre = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 1)
+                    model.descripcion = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 2)
+                    model.stock = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 3)
+                    model.precioUnitario = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 4)
+                    model.precioSinIva = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 5)
+                    model.pvp = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 6)
+                    model.precioLotes = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 7)
+                    model.nte = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 8)
+                    model.factura = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 9)
+                    model.adicional = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 10)
+                    model.n_precio = view.articulosTable.getValueAt(view.articulosTable.getSelectedRow(), 11)
+                }
+                    model.eliminar = true
+                    model.modificar = true
+            }else{
+                model.codigo = ""
+                model.nombre = ''
+                model.descripcion = ''
+                model.stock = ''
+                model.precioUnitario = ''
+                model.precioSinIva = ''
+                model.pvp = ''
+                model.precioLotes = ''
+                model.nte = ''
+                model.factura = ''
+                model.adicional = ''
+                model.n_precio = ''
             }
         } as ActionListener)
     }
@@ -85,7 +98,7 @@ class AdministracionController {
 
     def foco = { evt = null ->
         if (evt.component.name.equals("busquedaText")) {
-
+            view.administracionScreen.getRootPane().setDefaultButton(view.seleccionarBoton)
         } else if (evt.component.name.equals("busquedaCombo")) {
 
         } else if (evt.component.name.equals("familiasButton")) {
@@ -94,6 +107,7 @@ class AdministracionController {
             view.administracionScreen.getRootPane().setDefaultButton(view.newButton)
         } else if (evt.component.name.equals("modificarButton")) {
             view.administracionScreen.getRootPane().setDefaultButton(view.modificarButton)
+            time.stop()
         } else if (evt.component.name.equals("cancelarButton")) {
             view.administracionScreen.getRootPane().setDefaultButton(view.cancelarButton)
         } else if (evt.component.name.equals("guardarButton")) {
@@ -112,6 +126,8 @@ class AdministracionController {
             time2.start()
         } else if (evt.component.name.equals("pvpText")) {
             time2.stop()
+        } else if (evt.component.name.equals("seleccionarBoton")) {
+            view.administracionScreen.getRootPane().setDefaultButton(view.seleccionarBoton)
         }
     }
     def focoPerdido = { evt = null ->
@@ -141,8 +157,12 @@ class AdministracionController {
             view.busquedaText.setText('')
         } else if (evt.component.name.equals('busquedaText') && evt.keyChar == KeyEvent.VK_ENTER) {
 
-        } else if (evt.component.name.equals('articulosTable') && evt.getKeyCode() == 9) {
-            view.codigoText.requestFocusInWindow()
+        } else if (evt.component.name.equals('articulosTable') && evt.keyChar == KeyEvent.VK_TAB) {
+           if(view.codigoText.isEnabled()){
+               view.codigoText.requestFocusInWindow()
+           }else{
+               view.familiasButton.requestFocusInWindow()
+           }
         } else if (evt.component.name.equals('nombreText') && evt.keyChar == KeyEvent.VK_DELETE) {
             view.nombreText.setText('')
         }
@@ -331,11 +351,13 @@ class AdministracionController {
                 def art = inventarioDBService.getInventario()
                 edt {model.articulos.addAll(art)}
             }
-
         } else if (evt.actionCommand.equals('Familias')) {
             def mvc = buildMVCGroup('familias')
             def pantalla = mvc.view.nuevoNombreScreen
             pantalla.show()
+        } else if (evt.actionCommand.equals('Seleccionar')) {
+            view.articulosTable.setRowSelectionInterval(0, 0)
+            time.start()
         }
     }
 

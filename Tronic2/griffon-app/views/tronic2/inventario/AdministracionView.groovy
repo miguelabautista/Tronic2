@@ -10,12 +10,13 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator
 dialog(name: 'administracionScreen', id: 'administracionScreen', title: 'Administracion', modal: true, owner: app.views.firstScreen,
         preferredSize: [744, 493], resizable: true, pack: true,
         windowClosing: controller.salir) {
-    panel(layout: new MigLayout('', '[][][]', '[]15[]')) {
+    panel(layout: new MigLayout('', '[][][]', '[grow]15[grow]')) {
         hudLabel(text: 'seleccione tipo de busqueda', constraints: 'align right')
-        hudComboBox(name: 'busquedaCombo', id: 'busquedaCombo', items: model.tipoBusqueda, focusGained: controller.foco, constraints: 'split 2', itemStateChanged: controller.busquedaCombo)
+        hudComboBox(name: 'busquedaCombo', id: 'busquedaCombo', items: model.tipoBusqueda, focusGained: controller.foco, constraints: 'split 3', itemStateChanged: controller.busquedaCombo)
         jxtextField(name: 'busquedaText', id: 'busquedaText', preferredSize: [125, 23], focusGained: controller.foco, keyPressed: controller.teclas) {
             AutoCompleteDecorator.decorate(busquedaText, model.busquedaArticulos, true)
         }
+        button(name:'seleccionaBoton',id:'seleccionarBoton',text:'Seleccionar',mnemonic: 'R',actionPerformed:controller.actionButtons,focusGained: controller.foco)
         button(name: 'borrarBoton', id: 'borrarBoton', text: 'Borrar', mnemonic: 'B', actionPerformed: controller.borrarButton, focusGained: controller.foco, constraints: 'wrap')
         scrollPane(constraints: 'span, growx, wrap') {
             table(name: 'articulosTable', id: 'articulosTable', keyPressed: controller.teclas, focusGained: controller.foco, focusLost: controller.focoPerdido) {
@@ -59,7 +60,7 @@ dialog(name: 'administracionScreen', id: 'administracionScreen', title: 'Adminis
         textField(name: 'nprecioText', id: 'nprecioText', preferredSize: [125, 23], text: bind {model.n_precio}, errorRenderer: 'for:n_precioNuevo,styles:[hightlight]', enabled: bind {model.textFieldsEnable})
         hudLabel(text: 'Factura', constraints: 'align right')
         textField(name: 'facturaText', id: 'facturaText', preferredSize: [125, 23], constraints: 'wrap', text: bind {model.factura}, errorRenderer: 'for:facturaNuevo,styles:[hightlight]', enabled: bind {model.textFieldsEnable})
-        hudButton(name: 'familiasButton', id: 'familiasButton', text: 'Familias', mnemonic: 'F', focusGained: controller.foco, actionPerformed: controller.actionButtons)
+        button(name: 'familiasButton', id: 'familiasButton', text: 'Familias', mnemonic: 'F', focusGained: controller.foco, actionPerformed: controller.actionButtons)
         button(name: 'newButton', id: 'newButton', text: 'Nuevo', mnemonic: 'N', focusGained: controller.foco, constraints: 'span 7, split 7', actionPerformed: controller.actionButtons, enabled: bind {model.nuevo})
         button(name: 'modificarButton', id: 'modificarButton', text: 'Modificar', mnemonic: 'M', focusGained: controller.foco, actionPerformed: controller.actionButtons, enabled: bind {model.modificar})
         button(name: 'cancelarButton', id: 'cancelarButton', text: 'Cancelar', mnemonic: 'C', focusGained: controller.foco, actionPerformed: controller.actionButtons, enabled: bind {model.cancelar})
@@ -81,9 +82,8 @@ bean(model, adicionalNuevo: bind {adicionalText.text})
 bean(model, n_precioNuevo: bind {nprecioText.text})
 bean(model, facturaNuevo: bind {facturaText.text})
 articulosTable.getTableHeader().setReorderingAllowed(false)
-//TODO: comprobar esta funcionalidad
-bean(model, selection: bind {busquedaCombo.getSelectedItem().equals("Familia")})
 administracionScreen.setLocationRelativeTo(null)
 busquedaText.requestFocusInWindow()
+administracionScreen.getRootPane().setDefaultButton(seleccionarBoton)
 
 
