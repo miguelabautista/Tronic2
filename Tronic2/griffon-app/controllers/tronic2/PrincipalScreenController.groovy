@@ -9,7 +9,7 @@ class PrincipalScreenController {
     void mvcGroupInit(Map args) {
         model.usuario = args.user
     }
-
+    //Prueba
     def usuarios = { evt = null ->
         def mvc = buildMVCGroup('usuarios')
         def pantalla = mvc.view.usuariosScreen
